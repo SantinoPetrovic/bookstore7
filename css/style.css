@@ -1,0 +1,148 @@
+body {
+  	font-family:Verdana, sans-serif;
+  	font-size: 14px;
+
+}
+
+
+/*For Mocrosoft!*/
+main {
+  display:block;
+}
+
+/*section holding the delivery form*/
+.insertDelivery, .customerView {
+	width: 100%;
+	font-size: 15px;
+}
+
+/*the delivery form*/
+.deliveryForm, .customerForm{
+	width: 40%;
+	margin: 100px auto 30px auto;
+	padding: 50px;
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+.deliveryForm input, .customerForm input {
+	font-size: 15px;
+	display: block;
+	margin: 5px 0 25px 0;
+	padding-left: 10px;
+	border: 0;
+	border-radius: 6px;
+	width: 90%;
+	height: 40px;
+}
+
+.deliveryForm input:last-child, .customerForm input:last-child {
+	margin: 20px auto 0 auto;
+	color: white;
+	background-color: #32CD32;
+	width: 60%;
+	height: 60px;
+}
+
+#CTA {
+	margin: 0 auto;
+	width: 60%;
+	background-color: #D3D3D3;
+}
+
+.deliveryForm select {
+   	width: 20%;
+   	height: 40px;
+   	font-size: 15px;
+   	border: 1px solid gray;
+   	border-radius: 0;
+   	margin: 5px 0 50px 0;
+   	display: block;
+}
+
+
+/*section holding the search bar form (US3)*/
+.searchWithIsbn {
+	width: 100%;
+	font-size: 15px;
+}
+
+/*the search bar form*/
+.newSearchIsbn {
+	width: 40%;
+	margin: 100px auto 30px auto;
+	padding: 50px;
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+.newSearchIsbn input {
+	font-size: 15px;
+	display: block;
+	margin: 5px 0 25px 0;
+	padding-left: 10px;
+	border: 0;
+	border-radius: 6px;
+	width: 90%;
+	height: 40px;
+}
+
+.newSearchIsbn input:last-child {
+	margin: 20px auto 0 auto;
+	color: white;
+	background-color: #32CD32;
+	cursor: pointer;
+	width: 60%;
+	height: 60px;
+}
+
+.newSearchIsbn input:last-child:hover {
+	background-color: #00FF00;
+}
+
+
+/*section holding the sale table (US3)*/
+.saleTableHolder {
+	width: 100%;
+	font-size: 15px;
+}
+
+/*the sale table*/
+.saleTable {
+	width: 90%;
+	margin: 100px auto 30px auto;
+	background-color: #DCDCDC;
+	border-radius: 10px;
+}
+
+.saleTable caption {
+	margin-bottom: 10px;
+}
+
+.saleTable tr {
+	text-align: left;
+
+}
+
+.saleTable th:first-child, td:first-child {
+	padding: 10px;
+	border-left: 0;
+}
+
+.saleTable th,td {
+	padding: 15px;
+	border-left: 1px solid #C0C0C0;
+}
+
+.saleTable tbody tr:nth-child(even) {
+	background-color: #F5F5F5;	
+}
+
+.saleTable tbody tr:nth-child(odd) {
+	background-color: #FFFFFF;	
+}
+
+
+
+
+

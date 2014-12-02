@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Kundfönster</title>
+	<link rel="stylesheet" href="../css/meyer-reset.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<script src="../libs/json-to-table.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="../js/main.js"></script>
+</head>
+
+
+<body>
+
+	<main>
+		<header><h1>Sjuans bokhandel kundfönster</h1></header>
+			<section class="customerView">
+
+				<form class="customerForm">
+
+					<h2>Fyll i något av alternativen nedan och tryck på sök</h2>
+
+					<label for="isbn">ISBN nummer:</label>
+					<input type="number" name="isbn" max length="16" size="16">
+
+					<label for="titel">Titel:</label>
+					<input type="text" name="titel" size="20">
+
+					<label for="author">Författare:</label>
+					<input type="text" name="author">
+
+					<input type="submit" value="Sök">
+
+				</form>
+				<div class="searchResult"></div>
+			</section>
+		</main>
+		
+</body>

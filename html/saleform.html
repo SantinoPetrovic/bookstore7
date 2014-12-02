@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Bokhandeln</title>
+		<link rel="stylesheet" href="../css/meyer-reset.css">
+		<link rel="stylesheet" href="../css/style.css">
+		<script src="../libs/json-to-table.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	    <script src="../js/main.js"></script>
+	</head>
+
+	<body>
+
+		<main>
+
+			<section class="searchWithIsbn">
+				
+				<!-- search bar isbn -->
+				<form class="newSearchIsbn">
+
+					<label for="searchBar">Söka fram en bok på ISBN:</label>
+			        <input type="number" id="searchBar" name="searchBar"
+			        maxlength="13" placeholder="ISBN">
+
+			        <input type="submit" value="Sök">
+
+				</form>
+			</section>
+
+			<!-- sales table -->
+			<section class="saleTableHolder">
+				<table class="saleTable">
+					<caption>Försälnings tabell</caption>
+					<thead>
+						<tr>
+							<th>Försälnings_id</th>
+							<th>ISBN</th>
+							<th>Antal sålda</th>
+							<th>Datum</th>
+						</tr>
+					</thead>
+
+					<!-- the table data is just for ex -->
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>12345678901234</td>
+							<td>45</td>
+							<td>2014-11-30</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>0987654321234</td>
+							<td>30</td>
+							<td>2014-08-21</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>7654321890715</td>
+							<td>12</td>
+							<td>2014-12-15</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+
+					<!-- <tfoot></tfoot> -->
+				</table>
+			</section>
+
+		</main>
+			
+	</body>
+
+
+</html>
