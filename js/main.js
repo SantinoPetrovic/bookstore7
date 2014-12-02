@@ -11,6 +11,224 @@ $(function(){
 		$(".successMessage").hide();
 	}
 
+	function registerAuthor(deliveryInfo) {
+		//ajax for register delivery (authors)(first_name, last_name)
+		//to db/authors
+		$.ajax({
+			url:"libs/sql-ajax-json.php",
+
+			dataType:"json",
+
+			data:{
+				sql:"sql/sql-queries.sql",
+				run:"register authors",
+				//data to send
+				firstname: JSON.stringify(deliveryInfo["firstname"]),
+				lastname: JSON.stringify(deliveryInfo["lastname"])
+
+			},
+
+			success: function(data){
+				console.log("register authors success: ", data);
+				selectAuthors(deliveryInfo);
+			},
+
+			error: function(data){
+				console.log("register authors error: ", data);
+			}
+
+		});
+	}
+
+	function registerDelivery(deliveryInfo) {
+		//ajax for register delivery (isbn, f_price, date, quantity)
+		//to db/deliveries
+		$.ajax({
+			url:"libs/sql-ajax-json.php",
+
+			dataType:"json",
+
+			data:{
+				sql:"sql/sql-queries.sql",
+				run:"register delivery",
+				//data to send
+				isbn: JSON.stringify(deliveryInfo["isbn"]),
+				f_price: JSON.stringify(deliveryInfo["f_price"]),
+				delivery_date: JSON.stringify(deliveryInfo["delivery_date"]),
+				quantity: JSON.stringify(deliveryInfo["quantity"])
+
+			},
+
+			success: function(data){
+				console.log("register delivery success: ", data);
+			},
+
+			error: function(data){
+				console.log("register delivery error: ", data);
+			}
+
+		});
+	}
+	function registerBooks(deliveryInfo) {
+		//ajax for register delivery (isbn, title, description)
+		//to db/book
+		$.ajax({
+			url:"libs/sql-ajax-json.php",
+
+			dataType:"json",
+
+			data:{
+				sql:"sql/sql-queries.sql",
+				run:"register books",
+				//data to send
+				isbn: JSON.stringify(deliveryInfo["isbn"]),
+				title: JSON.stringify(deliveryInfo["title"]),
+				description: JSON.stringify(deliveryInfo["description"]),
+				shelf_id: JSON.stringify(deliveryInfo["shelfData"]["shelf_id"]),
+				book_author_id: JSON.stringify(deliveryInfo["authorData"]["book_author_id"])
+			},
+
+			success: function(data){
+				console.log("register books success: ", data);
+				selectIsbn(deliveryInfo);
+			},
+
+			error: function(data){
+				console.log("register books error: ", data);
+			}
+
+		});
+
+	}
+
+	function selectAuthors(deliveryInfo) {
+		//ajax for register delivery (isbn, title, description)
+		//to db/book
+		$.ajax({
+			url:"libs/sql-ajax-json.php",
+
+			dataType:"json",
+
+			data:{
+				sql:"sql/sql-queries.sql",
+				run:"select authors",
+			},
+
+			success: function(data){
+				console.log("select authors: ", data);
+				if (data.length > 0) {
+					deliveryInfo["authorData"] = data[0];
+					selectShelf(deliveryInfo);
+				} else {
+					registerAuthor(deliveryInfo);
+				}
+			},
+
+			error: function(data){
+				console.log("select authors error: ", data);
+			}
+
+		});
+
+	}
+
+	function selectIsbn(deliveryInfo) {
+		//ajax for register delivery (isbn, title, description)
+		//to db/book
+		$.ajax({
+			url:"libs/sql-ajax-json.php",
+
+			dataType:"json",
+
+			data:{
+				sql:"sql/sql-queries.sql",
+				run:"select isbn",
+				isbn: JSON.stringify(deliveryInfo["isbn"])
+			},
+
+			success: function(data){
+				console.log("select isbn: ", data);
+				if (data.length > 0) {
+					//deliveryInfo["bookData"] = data[0] ????
+					//maybe run registerDelivery(data, deliveryInfo) here?
+					printDeliveryResult(data);
+				} else {
+					selectAuthors(deliveryInfo);
+				}
+			},
+
+			error: function(data){
+				console.log("select isbn error: ", data);
+			}
+
+		});
+
+	}
+
+	function selectShelf(deliveryInfo) {
+		//ajax for register delivery (isbn, title, description)
+		//to db/book
+		$.ajax({
+			url:"libs/sql-ajax-json.php",
+
+			dataType:"json",
+
+			data:{
+				sql:"sql/sql-queries.sql",
+				run:"select shelf",
+				shelf_id: JSON.stringify(deliveryInfo["shelf_id"])
+			},
+
+			success: function(data){
+				console.log("select shelf: ", data);
+				if (data.length > 0) {
+					deliveryInfo["shelfData"] = data[0];
+					registerBooks(deliveryInfo);
+				} else {
+					registerShelf(deliveryInfo);
+				}
+			},
+
+			error: function(data){
+				console.log("select shelf error: ", data);
+			}
+
+		});
+
+	}
+
+	function registerShelf(deliveryInfo) {
+		//ajax for register delivery (isbn, title, description)
+		//to db/book
+		$.ajax({
+			url:"libs/sql-ajax-json.php",
+
+			dataType:"json",
+
+			data:{
+				sql:"sql/sql-queries.sql",
+				run:"register shelf",
+			},
+
+			success: function(data){
+				console.log("select shelf: ", data);
+				selectShelf(deliveryInfo);
+			},
+
+			error: function(data){
+				console.log("select shelf error: ", data);
+			}
+
+		});
+
+	}
+
+
+    function printDeliveryResult(data) {
+    	//maybe run registerDelivery(data, deliveryInfo) here?
+    	console.log("delivery result: ", data);
+    }
+
 	//Add submit handler for the deliveryInfo(form)
 	$('.insertDelivery .deliveryForm').submit(function(){
 		var deliveryInfo = {};
@@ -37,87 +255,11 @@ $(function(){
     		//if you got the right ISBN after you got the error message, it will hide
     		//and send the data to DB
     		$('.error_message').hide();
-			//ajax for register delivery (isbn, f_price, date, quantity)
-			//to db/deliveries
-			$.ajax({
-				url:"libs/sql-ajax-json.php",
+			
+			
 
-				dataType:"json",
-
-				data:{
-					sql:"sql/sql-queries.sql",
-					run:"register delivery",
-					//data to send
-					isbn: JSON.stringify(deliveryInfo["isbn"]),
-					f_price: JSON.stringify(deliveryInfo["f_price"]),
-					delivery_date: JSON.stringify(deliveryInfo["delivery_date"]),
-					quantity: JSON.stringify(deliveryInfo["quantity"])
-
-				},
-
-				success: function(data){
-					//console.log("success: ", data);
-				},
-
-				error: function(data){
-					//console.log("error: ", data);
-				}
-
-			});
-
-			//ajax for register delivery (isbn, title, description)
-			//to db/book
-			$.ajax({
-				url:"libs/sql-ajax-json.php",
-
-				dataType:"json",
-
-				data:{
-					sql:"sql/sql-queries.sql",
-					run:"register books",
-					//data to send
-					isbn: JSON.stringify(deliveryInfo["isbn"]),
-					title: JSON.stringify(deliveryInfo["title"]),
-					description: JSON.stringify(deliveryInfo["description"]),
-					shelf_id: JSON.stringify(deliveryInfo["shelf_id"]),
-					book_author_id: JSON.stringify(deliveryInfo["book_author_id"])
-				},
-
-				success: function(data){
-					//console.log("success: ", data);
-				},
-
-				error: function(data){
-					//console.log("error: ", data);
-				}
-
-			});
-
-			//ajax for register delivery (authors)(first_name, last_name)
-			//to db/authors
-			$.ajax({
-				url:"libs/sql-ajax-json.php",
-
-				dataType:"json",
-
-				data:{
-					sql:"sql/sql-queries.sql",
-					run:"register authors",
-					//data to send
-					firstname: JSON.stringify(deliveryInfo["firstname"]),
-					lastname: JSON.stringify(deliveryInfo["lastname"])
-
-				},
-
-				success: function(data){
-					//console.log("success: ", data);
-				},
-
-				error: function(data){
-					//console.log("error: ", data);
-				}
-
-			});
+			selectIsbn(deliveryInfo);
+			
 
 			//Show success message div
 			$(".successMessage").show();
@@ -130,7 +272,6 @@ $(function(){
 		//Clean up input after submit
         $('.deliveryForm').find('input').not("input[type='submit'], input[type='reset']").val('');
 
-        
 
 
 
