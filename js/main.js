@@ -1,6 +1,16 @@
 $(function(){
+
 	//Hide the error message for ISBN.
 	$('.error_message').hide();
+
+	//Hide success message div
+	$(".successMessage").hide();
+
+	//Function to hide success message div
+	function hideSuccessMessage(){
+		$(".successMessage").hide();
+	}
+
 	//Add submit handler for the deliveryInfo(form)
 	$('.insertDelivery .deliveryForm').submit(function(){
 		var deliveryInfo = {};
@@ -127,9 +137,19 @@ $(function(){
 
 			});
 
+			//Show success message div
+			$(".successMessage").show();
+
+			//Hide success message(div) when click ok
+			$('.successMessageButton').click(hideSuccessMessage);
+
 		}
 
-      $('.deliveryForm').find('input').not("input[type='submit'], input[type='reset']").val('');
+		//Clean up input after submit
+        $('.deliveryForm').find('input').not("input[type='submit'], input[type='reset']").val('');
+
+        
+
 
 
 		return false;
