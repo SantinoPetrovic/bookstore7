@@ -50,7 +50,7 @@ $(function(){
 					//data to send
 					isbn: JSON.stringify(deliveryInfo["isbn"]),
 					f_price: JSON.stringify(deliveryInfo["f_price"]),
-					date: JSON.stringify(deliveryInfo["date"]),
+					delivery_date: JSON.stringify(deliveryInfo["delivery_date"]),
 					quantity: JSON.stringify(deliveryInfo["quantity"])
 
 				},
@@ -74,12 +74,13 @@ $(function(){
 
 				data:{
 					sql:"sql/sql-queries.sql",
-					run:"register book",
+					run:"register books",
 					//data to send
 					isbn: JSON.stringify(deliveryInfo["isbn"]),
 					title: JSON.stringify(deliveryInfo["title"]),
-					description: JSON.stringify(deliveryInfo["description"])
-
+					description: JSON.stringify(deliveryInfo["description"]),
+					shelf_id: JSON.stringify(deliveryInfo["shelf_id"]),
+					book_author_id: JSON.stringify(deliveryInfo["book_author_id"])
 				},
 
 				success: function(data){
@@ -101,10 +102,10 @@ $(function(){
 
 				data:{
 					sql:"sql/sql-queries.sql",
-					run:"add author",
+					run:"register authors",
 					//data to send
-					first_name: JSON.stringify(deliveryInfo["first_name"]),
-					last_name: JSON.stringify(deliveryInfo["last_name"])
+					firstname: JSON.stringify(deliveryInfo["firstname"]),
+					lastname: JSON.stringify(deliveryInfo["lastname"])
 
 				},
 
@@ -115,25 +116,6 @@ $(function(){
 				error: function(data){
 					//console.log("error: ", data);
 				}
-
-			});
-
-
-			//ajax for register (isbn, shelfs_id) to db/book_shelfs
-			$.ajax({
-				url:"libs/sql-ajax-json.php",
-				dataType:"json",
-
-				data:{
-					sql:"sql/sql-queries.sql",
-					run:"register shelfs",
-					//data to send
-					code: JSON.stringify(deliveryInfo["code"])
-			},
-
-				success: function(data){},
-
-				error: function(data){}
 
 			});
 
