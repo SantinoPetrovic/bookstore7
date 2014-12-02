@@ -18,10 +18,10 @@ $(function(){
 		var isbnGood = true;
         if(isbn.length != 13){
         	isbnGood = false;
-    	}
-    	if(!isbnGood){
-    		//show the error message for ISBN.
-    		$('.error_message').show();
+        }
+        if(!isbnGood){
+        	//show the error message for ISBN.
+        	$('.error_message').show();
     	}
     	else {
     		//if you got the right ISBN after you got the error message, it will hide
@@ -128,6 +128,8 @@ $(function(){
 			});
 
 		}
+
+      $('.deliveryForm').find('input').not("input[type='submit'], input[type='reset']").val('');
 
 
 		return false;
