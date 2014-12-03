@@ -26,7 +26,7 @@ SELECT author_id FROM authors WHERE firstname = {firstname} AND lastname = {last
 # select isbn
 SELECT * FROM books WHERE isbn = {isbn};
 
-# select shelves
+# select shelf
 SELECT shelf_id FROM shelves WHERE shelf_id = {shelf_id};
 
 

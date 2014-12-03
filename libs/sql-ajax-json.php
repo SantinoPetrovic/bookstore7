@@ -71,7 +71,7 @@ if(strpos($do,"{") !== false || strpos($do,"}") !== false){
 }
 
 // Use PDOHelper to run the dbquery
-die($do);
+// die($do);
 $dbh = new PDOHelper($info["hostname"],$info["database"],$info["username"],$info["password"]);
 echo($dbh -> jsonQuery($do));
 

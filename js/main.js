@@ -83,7 +83,9 @@ $(function(){
 				//data to send
 				isbn: JSON.stringify(deliveryInfo["isbn"]),
 				title: JSON.stringify(deliveryInfo["title"]),
-				description: JSON.stringify(deliveryInfo["description"]),
+				quantity: JSON.stringify(deliveryInfo["quantity"]),
+				delivery_date: JSON.stringify(deliveryInfo["delivery_date"]),
+				f_price: JSON.stringify(deliveryInfo["f_price"]),
 				shelf_id: JSON.stringify(deliveryInfo["shelfData"]["shelf_id"]),
 				book_author_id: JSON.stringify(deliveryInfo["authorData"]["book_author_id"])
 			},
@@ -112,6 +114,8 @@ $(function(){
 			data:{
 				sql:"sql/sql-queries.sql",
 				run:"select authors",
+				firstname: JSON.stringify(deliveryInfo["firstname"]),
+				lastname: JSON.stringify(deliveryInfo["lastname"])
 			},
 
 			success: function(data){
@@ -168,6 +172,7 @@ $(function(){
 	function selectShelf(deliveryInfo) {
 		//ajax for register delivery (isbn, title, description)
 		//to db/book
+		console.log("selectShelf deliveryInfo: ", deliveryInfo);
 		$.ajax({
 			url:"libs/sql-ajax-json.php",
 
@@ -208,15 +213,16 @@ $(function(){
 			data:{
 				sql:"sql/sql-queries.sql",
 				run:"register shelf",
+				shelf_id: JSON.stringify(deliveryInfo["shelf_id"])
 			},
 
 			success: function(data){
-				console.log("select shelf: ", data);
+				console.log("register shelf: ", data);
 				selectShelf(deliveryInfo);
 			},
 
 			error: function(data){
-				console.log("select shelf error: ", data);
+				console.log("register shelf error: ", data);
 			}
 
 		});
