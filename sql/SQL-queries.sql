@@ -32,3 +32,22 @@ SELECT shelf_id FROM shelves WHERE shelf_id = {shelf_id};
 
 
 
+# select f_price
+SELECT f_price FROM deliveries WHERE f_price = {f_price};
+
+# register sale_price
+INSERT INTO books (sale_price) VALUES ({sale_price});
+
+# select f_price and set to sale_price
+UPDATE books SET sale_price = f_price * 1.8 WHERE sale_price = {sale_price};
+
+
+
+
+
+
+
+
+
+
+

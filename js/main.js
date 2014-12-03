@@ -278,4 +278,84 @@ $(function(){
 		return false;
 	});
 
+
+
+	//US2
+	function selectF_price(deliveryInfo) {
+		
+		$.ajax({
+			url:"libs/sql-ajax-json.php",
+
+			dataType:"json",
+
+			data:{
+				sql:"sql/sql-queries.sql",
+				run:"select f_price",
+				f_price: JSON.stringify(deliveryInfo["f_price"])
+			},
+
+			success: function(data){
+				console.log("select f_price: ", data);
+			},
+
+			error: function(data){
+				console.log("select f_price error: ", data);
+			}
+
+		});
+	}
+
+	function setSale_price(){
+
+		$.ajax({
+			url:"libs/sql-ajax-json.php",
+
+			dataType:"json",
+
+			data:{
+				sql:"sql/sql-queries.sql",
+				run:"select f_price and set to sale_price",
+			},
+
+			success: function(data){
+				console.log("select f_price: ", data);
+			},
+
+			error: function(data){
+				console.log("select f_price error: ", data);
+			}
+
+		});
+	}
+
+	function registerSale_price(deliveryInfo){
+
+		$.ajax({
+			url:"libs/sql-ajax-json.php",
+
+			dataType:"json",
+
+			data:{
+				sql:"sql/sql-queries.sql",
+				run:"register sale_price",
+				sale_price: JSON.stringify(deliveryInfo["sale_price"])
+			},
+
+			success: function(data){
+				console.log("register sale_price: ", data);
+			},
+
+			error: function(data){
+				console.log("register sale_price error: ", data);
+			}
+
+		});
+	}
+
 });
+
+
+
+
+
+
