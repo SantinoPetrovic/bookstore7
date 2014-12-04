@@ -52,10 +52,10 @@ $(function(){
 				sql:"sql/sql-queries.sql",
 				run:"register delivery",
 				//data to send
-				isbn: JSON.stringify(deliveryInfo["isbn"]),
-				f_price: JSON.stringify(deliveryInfo["f_price"]),
+				isbn: deliveryInfo.isbn,
+				f_price: deliveryInfo.f_price,
 				delivery_date: JSON.stringify(deliveryInfo["delivery_date"]),
-				quantity: JSON.stringify(deliveryInfo["quantity"])
+				quantity: deliveryInfo.quantity
 
 			},
 
@@ -81,13 +81,13 @@ $(function(){
 				sql:"sql/sql-queries.sql",
 				run:"register books",
 				//data to send
-				isbn: JSON.stringify(deliveryInfo["isbn"]),
+				//({isbn}, {title}, {description}, {shelf_id}, {book_author_id})
+				isbn: deliveryInfo.isbn,
 				title: JSON.stringify(deliveryInfo["title"]),
-				quantity: JSON.stringify(deliveryInfo["quantity"]),
-				delivery_date: JSON.stringify(deliveryInfo["delivery_date"]),
-				f_price: JSON.stringify(deliveryInfo["f_price"]),
+				description: JSON.stringify(deliveryInfo["description"]),
+				//fråga hugo
 				shelf_id: JSON.stringify(deliveryInfo["shelfData"]["shelf_id"]),
-				book_author_id: JSON.stringify(deliveryInfo["authorData"]["book_author_id"])
+				book_author_id: deliveryInfo["authorData"]["author_id"]
 			},
 
 			success: function(data){
@@ -147,7 +147,7 @@ $(function(){
 			data:{
 				sql:"sql/sql-queries.sql",
 				run:"select isbn",
-				isbn: JSON.stringify(deliveryInfo["isbn"])
+				isbn: deliveryInfo.isbn
 			},
 
 			success: function(data){
@@ -155,8 +155,12 @@ $(function(){
 				if (data.length > 0) {
 					//deliveryInfo["bookData"] = data[0] ????
 					//maybe run registerDelivery(data, deliveryInfo) here?
+					 if (deliveryInfo.newDelivery) {
+           				 registerDelivery(deliveryInfo);
+         			 }
 					printDeliveryResult(data);
-				} else {
+				} 
+				else {
 					selectAuthors(deliveryInfo);
 				}
 			},
@@ -235,6 +239,37 @@ $(function(){
     	console.log("delivery result: ", data);
     }
 
+    //multiplying f_price with 1.8 to price
+	function addPrice(deliveryInfo){
+		 console.log("addPrice: ", deliveryInfo);
+		if(!deliveryInfo.price){
+			deliveryForm.price = Math.round(deliveryInfo.f_price * 1.8);
+		}
+		//ajax call for register the price in price_history
+		$.ajax({
+			url:"libs/sql-ajax-json.php",
+
+			dataType:"json",
+
+			data:{
+				sql:"sql/sql-queries.sql",
+				run:"register price",
+				isbn: deliveryInfo.isbn,
+				price: deliveryInfo.price
+			},
+
+			success: function(data){
+				console.log("register price: ", data);
+			},
+
+			error: function(data){
+				console.log("register price error: ", data);
+			}
+
+		});
+	}
+
+
 	//Add submit handler for the deliveryInfo(form)
 	$('.insertDelivery .deliveryForm').submit(function(){
 		var deliveryInfo = {};
@@ -262,101 +297,26 @@ $(function(){
     		//and send the data to DB
     		$('.error_message').hide();
 			
-			
-
-			selectIsbn(deliveryInfo);
-			
-
 			//Show success message div
 			$(".successMessage").show();
 
+			deliveryInfo.newDelivery = true;
+
+			selectIsbn(deliveryInfo);
+
 			//Hide success message(div) when click ok
 			$('.successMessageButton').click(hideSuccessMessage);
+
 
 		}
 
 		//Clean up input after submit
         $('.deliveryForm').find('input').not("input[type='submit'], input[type='reset']").val('');
-
-
-
-
+          deliveryInfo.newDelivery = true;
+    	  console.log("deliveryInfo: ", deliveryInfo);
+   		  selectIsbn(deliveryInfo);
 		return false;
 	});
-
-
-
-	//US2
-	function selectF_price(deliveryInfo) {
-		
-		$.ajax({
-			url:"libs/sql-ajax-json.php",
-
-			dataType:"json",
-
-			data:{
-				sql:"sql/sql-queries.sql",
-				run:"select f_price",
-				f_price: JSON.stringify(deliveryInfo["f_price"])
-			},
-
-			success: function(data){
-				console.log("select f_price: ", data);
-			},
-
-			error: function(data){
-				console.log("select f_price error: ", data);
-			}
-
-		});
-	}
-
-	function setSale_price(){
-
-		$.ajax({
-			url:"libs/sql-ajax-json.php",
-
-			dataType:"json",
-
-			data:{
-				sql:"sql/sql-queries.sql",
-				run:"select f_price and set to sale_price",
-			},
-
-			success: function(data){
-				console.log("select f_price: ", data);
-			},
-
-			error: function(data){
-				console.log("select f_price error: ", data);
-			}
-
-		});
-	}
-
-	function registerSale_price(deliveryInfo){
-
-		$.ajax({
-			url:"libs/sql-ajax-json.php",
-
-			dataType:"json",
-
-			data:{
-				sql:"sql/sql-queries.sql",
-				run:"register sale_price",
-				sale_price: JSON.stringify(deliveryInfo["sale_price"])
-			},
-
-			success: function(data){
-				console.log("register sale_price: ", data);
-			},
-
-			error: function(data){
-				console.log("register sale_price error: ", data);
-			}
-
-		});
-	}
 
 });
 
