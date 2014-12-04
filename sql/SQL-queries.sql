@@ -5,7 +5,7 @@
 # database: bookstore7
 
 # register delivery
-INSERT INTO delivery (isbn, quantity, delivery_date, f_price)
+INSERT INTO deliveries (isbn, quantity, delivery_date, f_price)
 VALUES ({isbn}, {quantity}, {delivery_date}, {f_price});
 
 # register books

@@ -61,6 +61,7 @@ $(function(){
 
 			success: function(data){
 				console.log("register delivery success: ", data);
+				addPrice(deliveryInfo);
 			},
 
 			error: function(data){
@@ -157,6 +158,7 @@ $(function(){
 					//maybe run registerDelivery(data, deliveryInfo) here?
 					 if (deliveryInfo.newDelivery) {
            				 registerDelivery(deliveryInfo);
+           				 return;
          			 }
 					printDeliveryResult(data);
 				} 
@@ -243,7 +245,7 @@ $(function(){
 	function addPrice(deliveryInfo){
 		 console.log("addPrice: ", deliveryInfo);
 		if(!deliveryInfo.price){
-			deliveryForm.price = Math.round(deliveryInfo.f_price * 1.8);
+			deliveryInfo.price = Math.round(deliveryInfo.f_price * 1.8);
 		}
 		//ajax call for register the price in price_history
 		$.ajax({
@@ -260,6 +262,8 @@ $(function(){
 
 			success: function(data){
 				console.log("register price: ", data);
+				deliveryInfo.newDelivery = false;
+				selectIsbn(deliveryInfo);
 			},
 
 			error: function(data){
@@ -312,9 +316,7 @@ $(function(){
 
 		//Clean up input after submit
         $('.deliveryForm').find('input').not("input[type='submit'], input[type='reset']").val('');
-          deliveryInfo.newDelivery = true;
     	  console.log("deliveryInfo: ", deliveryInfo);
-   		  selectIsbn(deliveryInfo);
 		return false;
 	});
 
