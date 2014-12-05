@@ -274,6 +274,44 @@ $(function(){
 	}
 
 
+
+   //enable/disable manualPrice
+  var manualPrice = false;
+  $(".deliveryForm input[type='checkbox']").click(function() {
+    // var theBox = $(".deliveryForm input[type='checkbox']:checked");
+    // var f_price = $(".deliveryForm input[name='f_price']").val();
+    //when manualPrice checkbox is checked
+    if ($(".deliveryForm input[type='checkbox']:checked").length) {
+      //set price input field to required and not disabled
+      $(".deliveryForm input[name='manualPrice']").attr("disabled", false);
+      $(".deliveryForm input[name='manualPrice']").attr("required", true);
+      manualPrice = true;
+    }
+    //when manualPrice checkbox is unchecked
+    else {
+      //set price input field to disabled and not required
+      $(".deliveryForm input[name='manualPrice']").attr("disabled", true);
+      $(".deliveryForm input[name='manualPrice']").attr("required", false);
+      //and show the automatic sale price again
+      $(".deliveryForm input[name='manualPrice']").val(Math.round($(".deliveryForm input[name='f_price']").val()*1.8));
+      manualPrice = false;
+    }
+  });
+
+
+
+  // - - - - - - US2 ??? - - - - - -
+  
+  //keyup handler for providing an automatic sale price
+  // $(".deliveryForm input[name='f_price']").keyup(function() {
+  //   var f_price = $(this).val();
+  //   //if the user is not entering a sale price manually
+  //   if (!manualPrice) {
+  //     $(".deliveryForm input[name='manualPrice']").val(Math.round(f_price*1.8));
+  //   }
+  // });
+// - - - - - - - - - - - - -  - - - - - - - - -
+
 	//Add submit handler for the deliveryInfo(form)
 	$('.insertDelivery .deliveryForm').submit(function(){
 		var deliveryInfo = {};
