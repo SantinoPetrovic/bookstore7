@@ -276,7 +276,7 @@ $(function(){
 
 
    //enable/disable manualPrice
-  var manualPrice = false;
+  var sale_price = false;
   $(".deliveryForm input[type='checkbox']").click(function() {
     // var theBox = $(".deliveryForm input[type='checkbox']:checked");
     // var f_price = $(".deliveryForm input[name='f_price']").val();
@@ -285,7 +285,7 @@ $(function(){
       //set price input field to required and not disabled
       $(".deliveryForm input[name='manualPrice']").attr("disabled", false);
       $(".deliveryForm input[name='manualPrice']").attr("required", true);
-      manualPrice = true;
+      sale_price = true;
     }
     //when manualPrice checkbox is unchecked
     else {
@@ -294,7 +294,7 @@ $(function(){
       $(".deliveryForm input[name='manualPrice']").attr("required", false);
       //and show the automatic sale price again
       $(".deliveryForm input[name='manualPrice']").val(Math.round($(".deliveryForm input[name='f_price']").val()*1.8));
-      manualPrice = false;
+      sale_price = false;
     }
   });
 
@@ -303,13 +303,13 @@ $(function(){
   // - - - - - - US2 ??? - - - - - -
   
   //keyup handler for providing an automatic sale price
-  // $(".deliveryForm input[name='f_price']").keyup(function() {
-  //   var f_price = $(this).val();
-  //   //if the user is not entering a sale price manually
-  //   if (!manualPrice) {
-  //     $(".deliveryForm input[name='manualPrice']").val(Math.round(f_price*1.8));
-  //   }
-  // });
+  $(".deliveryForm input[name='f_price']").keyup(function() {
+    var f_price = $(this).val();
+    //if the user is not entering a sale price manually
+    if (!manualPrice) {
+      $(".deliveryForm input[name='manualPrice']").val(Math.round(f_price*1.8));
+    }
+  });
 // - - - - - - - - - - - - -  - - - - - - - - -
 
 	//Add submit handler for the deliveryInfo(form)
