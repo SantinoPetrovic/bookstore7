@@ -1,14 +1,13 @@
 body {
   	font-family:Verdana, sans-serif;
   	font-size: 14px;
-
 }
-
 
 /*For Microsoft!*/
 main {
   display:block;
 }
+
 
 /*section holding the delivery form*/
 .insertDelivery, .customerView {
@@ -16,11 +15,22 @@ main {
 	font-size: 15px;
 }
 
+/*The title of the delivery page*/
+.insertDelivery .deliveryPageTitle{
+	font-size: 20px;
+	width: 40%;
+	margin: 20px auto 0px auto;
+	padding: 20px 90px 20px 10px;
+	text-align: left;
+	background-color: #DCDCDC;
+	border-radius: 10px;
+}
+
 /*the delivery form*/
 .deliveryForm, .customerForm{
 	width: 40%;
-	margin: 100px auto 30px auto;
-	padding: 50px;
+	margin: 10px auto 30px auto;
+	padding: 15px 50px 20px 50px;
 	background-color: #F5F5F5;
 	border-radius: 10px;
 }
@@ -33,7 +43,7 @@ main {
 	border: 0;
 	border-radius: 6px;
 	width: 90%;
-	height: 40px;
+	height: 35px;
 }
 
 .deliveryForm input:last-child, .customerForm input:last-child {
@@ -44,23 +54,39 @@ main {
 	height: 60px;
 }
 
+.deliveryForm input:last-child:hover {
+	background-color: #00FF00;
+}
+
+/*reset button*/
 #CTA {
 	margin: 0 auto;
 	width: 60%;
 	background-color: #D3D3D3;
 }
 
-.deliveryForm select {
-   	width: 20%;
-   	height: 40px;
-   	font-size: 15px;
-   	border: 1px solid gray;
-   	border-radius: 0;
-   	margin: 5px 0 50px 0;
-   	display: block;
+#CTA:hover {
+	background-color: #FF0000;
+}
+
+/*sale prise checkbox*/
+.deliveryForm #checkboxId{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius:0;
+	width: 10%;
+	height: 20px;
+}
+
+/*ISBN error message*/
+.error_message {
+	color: red;
 }
 
 
+/* - - - - - - - - - - - (US3) - - - - - - - - -*/
 /*section holding the search bar form (US3)*/
 .searchWithIsbn {
 	width: 100%;
@@ -100,9 +126,6 @@ main {
 	background-color: #00FF00;
 }
 
-.error_message {
-	color: red;
-}
 
 /*section holding the sale table (US3)*/
 .saleTableHolder {
@@ -110,7 +133,7 @@ main {
 	font-size: 15px;
 }
 
-/*the sale table*/
+/*the sale table(US3)*/
 .saleTable {
 	width: 90%;
 	margin: 100px auto 30px auto;
@@ -144,8 +167,4 @@ main {
 .saleTable tbody tr:nth-child(odd) {
 	background-color: #FFFFFF;	
 }
-
-
-
-
 
