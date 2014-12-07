@@ -1,6 +1,7 @@
 body {
   	font-family:Verdana, sans-serif;
   	font-size: 14px;
+  	width: 100%;
 }
 
 /*For Microsoft!*/
@@ -50,6 +51,7 @@ main {
 	margin: 20px auto 0 auto;
 	color: white;
 	background-color: #32CD32;
+	cursor: pointer;
 	width: 60%;
 	height: 60px;
 }
@@ -62,6 +64,7 @@ main {
 #CTA {
 	margin: 0 auto;
 	width: 60%;
+	cursor: pointer;
 	background-color: #D3D3D3;
 }
 
@@ -85,6 +88,36 @@ main {
 	color: red;
 }
 
+/*success message div*/
+.successMessage {
+	font-size: 17px;
+	position: fixed;
+	top: 100px;
+	left: 25%;
+	z-index: 10;
+	width: 30%;
+	padding: 100px;
+	color: white;
+	background-color: #A9A9A9;
+	border-radius: 10px;
+}
+.successMessage .successMessageButton{
+	width: 30%;
+	height: 40px;
+	margin: 40px 0 0 70%;
+	border: 1px solid black;
+	border-radius: 5px;
+	font-size: 14px;
+	color: white;
+	background-color: #696969;
+}
+
+.successMessage .successMessageButton:hover{
+	cursor: pointer;
+	color: black;
+	background-color: #F5F5F5;
+	box-shadow: 2px 3px 10px black;
+}
 
 /* - - - - - - - - - - - (US3) - - - - - - - - -*/
 /*section holding the search bar form (US3)*/
